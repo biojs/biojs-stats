@@ -15,3 +15,10 @@ API
 
 Gives a sorted list of all packages with their `created` timestamp.
 The list additionally contains `count` (the number of packages that were available at the creation of package X)
+
+Developing
+---------
+
+```
+npm run start
+```

@@ -8,7 +8,7 @@
     "url": "git://github.com/biojs/biojs-stats"
   },
   "scripts": {
-    "start": "node server.js 5000"
+    "start": "node server.js 3000"
   },
   "author": {
     "name": "BioJS",
