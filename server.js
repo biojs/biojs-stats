@@ -2,10 +2,16 @@ var schedule = require('node-schedule');
 var express = require('express');
 var compress = require('compression');
 var Minilog = require("minilog");
+var packages = require("./lib/packages");
+var wares = require("./lib/middlewares");
+
+// config
+var port = process.env.PORT || process.argv[2] || 3000;
+var keys = ["biojs", "bionode"];
+
+// set up logging
 Minilog.enable();
 var log = Minilog("main");
-
-var keys = ["biojs", "bionode"];
 
 var stats = {};
 var packages = require("./lib/packages.js");
@@ -14,17 +20,15 @@ stats.packages = new packages({
 });
 
 var app = express();
-var port = process.env.PORT || process.argv[2] || 3000;
 app.use(compress());
+wares.activate(app);
 
-// refresh every hour
+// refresh every half an hour
 new schedule.scheduleJob({
-  seconds: 30
+  minute: 30
 }, function() {
-  console.log('You will see this message every second');
   runner();
 });
-
 
 app.get("/packages/simple", function(req, res) {
   var result = stats.packages.result;
