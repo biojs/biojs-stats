@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "git://github.com/biojs/biojs-stats"
   },
@@ -18,10 +18,10 @@
   "dependencies": {
     "bluebird": "^2.9.5",
     "compression": "^1.4.0",
-    "cron": "^1.0.6",
     "express": "^4.11.2",
     "lodash": "^3.0.1",
     "minilog": "^2.0.6",
+    "node-schedule": "^0.1.15",
     "npm-keywords": "^1.0.4",
     "npm-registry": "^0.1.13"
   }
