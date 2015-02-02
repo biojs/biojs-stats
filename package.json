@@ -23,6 +23,7 @@
     "minilog": "^2.0.6",
     "node-schedule": "^0.1.15",
     "npm-keywords": "^1.0.4",
-    "npm-registry": "^0.1.13"
+    "npm-registry": "^0.1.13",
+    "swig": "^1.4.2"
   }
 }
