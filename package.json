@@ -1,0 +1,25 @@
+{
+  "name": "biojs-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository":{
+    "type": "git",
+    "url": "git://github.com/biojs/biojs-stats"
+  }
+  "author": "greenify <greenify@notsharingmy.info> (https://github.com/greenify)",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.5",
+    "compression": "^1.4.0",
+    "cron": "^1.0.6",
+    "express": "^4.11.2",
+    "lodash": "^3.0.1",
+    "minilog": "^2.0.6",
+    "npm-keywords": "^1.0.4",
+    "npm-registry": "^0.1.13"
+  }
+}
