@@ -40,15 +40,21 @@
                         title: {
                             text: 'Timeline'
                         },
-                        ordinal: false
+                        ordinal: false,
+                        max: new Date().getTime()
                     },
 
                     series: [{
                         name: 'BioJS Growth Curve',
                         data: highChartsArr,
+                        marker: {
+                            enabled: true,
+                            radius: 2,
+                            fillColor: "#000CBA"
+                        },
                     }],
                     tooltip: {
-						useHTML: true,
+                        useHTML: true,
                         formatter: function() {
                             var name = data[this.y].name;
                             return "<a href='http://biojs.io/d/" + name + "' target='_blank'>" + name + "</a>";
@@ -61,4 +67,5 @@
         });
     </script>
 </body>
+
 </html>
