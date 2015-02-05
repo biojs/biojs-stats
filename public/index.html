@@ -1,73 +1,64 @@
 <html>
+
 <body>
-<script src="jquery.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/highstock.js"></script>
+    <script src="lib/highstocks_exporting.js"></script>
 
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+    <div id="container" style="height: 400px; min-width: 310px"></div>
+    <script>
+        var statsUrl = 'http://stats.biojs.net/api/packages/simple';
 
-<div id="container" style="height: 400px; min-width: 310px"></div>
-<script>
+        $(function() {
 
-var statsUrl= 'http://stats.biojs.net/api/packages/simple';
+            $.getJSON(statsUrl, function(data) {
+                highChartsArr = data.map(function(p) {
+                    return [new Date(p.created).getTime(), p.count]
+                });
+                $('#container').highcharts('StockChart', {
+                    rangeSelector: {
+                        selected: 2
+                    },
+                    title: {
+                        text: 'biojs.io package growth stats'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    yAxis: {
+                        title: {
+                            text: '# Packages'
+                        },
+                        min: 0
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: {
+                            month: '%e %b',
+                            year: '%b'
+                        },
+                        title: {
+                            text: 'Timeline'
+                        },
+                        ordinal: false
+                    },
 
-$(function () {
+                    series: [{
+                        name: 'BioJS Growth Curve',
+                        data: highChartsArr,
+                    }],
+                    tooltip: {
+						useHTML: true,
+                        formatter: function() {
+                            var name = data[this.y].name;
+                            return "<a href='http://biojs.io/d/" + name + "' target='_blank'>" + name + "</a>";
+                        }
+                    },
 
-    $.getJSON(statsUrl, function (data) {
-        var json = {"bindings":data}
-        var parsedData=[]
-        for (var i = 0; i < json.bindings.length; i++) {
-            var date=json.bindings[i].created;
-            var row=date.split(/[-,T,:,.]/);
-            var createdDate=Date.UTC(row[0],row[1],row[2],row[3],row[4],row[5]);
-            var instance=[createdDate,json.bindings[i].count]
-            parsedData.push(instance)
-        };
-        $('#container').highcharts('StockChart', {
+                });
+            });
 
-
-            rangeSelector : {
-                selected : 1
-            },
-
-            title : {
-                text : 'BioJS Growth Stats'
-            },
-
-            subtitle: {
-                text: 'BioJS is opensource.'
-            },
-
-            yAxis: {
-                title: {
-                    text: 'Packages'
-                },
-                min: 0
-            },
-             xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    month: '%e %b',
-                    year: '%b'
-                },
-                title: {
-                    text: 'Timeline'
-                },
-                ordinal:false
-            },
-
-            series : [{
-                name : 'BioJS Growth Curve',
-                data : parsedData,
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }]
         });
-    });
-
-});
-
-
-</script>
+    </script>
 </body>
 </html>
